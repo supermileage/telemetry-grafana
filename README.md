@@ -1,2 +1,1 @@
-# telemetry-grafana
-Grafana Dashboards for Telemetry
+# Grafana Dashboards for Telemetry
