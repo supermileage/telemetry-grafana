@@ -1,0 +1,675 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 10,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": false,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": [
+          "fc"
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "title": "Live Data",
+      "transparent": true,
+      "type": "dashlist"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": false,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": [
+          "urban"
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "title": "Live Data",
+      "transparent": true,
+      "type": "dashlist"
+    },
+    {
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": false,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": [
+          "proto"
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "title": "Live Data",
+      "transparent": true,
+      "type": "dashlist"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "lcd-gauge",
+            "filterable": false
+          },
+          "links": [
+            {
+              "title": "Link to Dashboard with Date",
+              "url": "https://ubcsupermileage.grafana.net/d/THM10u-nz/vehicle-fuel-cell-proto?from=${__value.time}&to=${__data.fields.time_end}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "super-light-blue",
+                "value": 5
+              },
+              {
+                "color": "light-blue",
+                "value": 25
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 50
+              },
+              {
+                "color": "dark-blue",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_start"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_end"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              },
+              {
+                "id": "unit"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 6,
+        "x": 0,
+        "y": 4
+      },
+      "id": 7,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT DATE(TIMESTAMP(recorded_at), 'America/Vancouver') AS date, COUNT(DISTINCT(TIMESTAMP(recorded_at, 'America/Vancouver'))) as entries FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()' GROUP BY DATE(TIMESTAMP(recorded_at), 'America/Vancouver')\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "r-FP_Pbnz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].date.value",
+              "name": "Date",
+              "type": "string"
+            },
+            {
+              "jsonPath": "$[*].entries",
+              "language": "jsonpath",
+              "name": "Data",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].date.value",
+              "language": "jsonpath",
+              "name": "time_start",
+              "type": "time"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Historical Data - Fuel-Cell Proto",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "time_end",
+            "binary": {
+              "left": "time_start",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "time_start"
+              ],
+              "reducer": "allValues"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "time_end"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "lcd-gauge",
+            "filterable": false
+          },
+          "links": [
+            {
+              "title": "Link to Dashboard with Date",
+              "url": "https://ubcsupermileage.grafana.net/d/5kLTuPx7z/vehicle-urban?from=${__value.time}&to=${__data.fields.time_end}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "super-light-green",
+                "value": 5
+              },
+              {
+                "color": "light-green",
+                "value": 25
+              },
+              {
+                "color": "semi-dark-green",
+                "value": 50
+              },
+              {
+                "color": "dark-green",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_start"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_end"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              },
+              {
+                "id": "unit"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 6,
+        "x": 6,
+        "y": 4
+      },
+      "id": 10,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT DATE(TIMESTAMP(recorded_at), 'America/Vancouver') AS date, COUNT(DISTINCT(TIMESTAMP(recorded_at, 'America/Vancouver'))) as entries FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'URBAN' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()' GROUP BY DATE(TIMESTAMP(recorded_at), 'America/Vancouver')\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "r-FP_Pbnz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].date.value",
+              "name": "Date",
+              "type": "string"
+            },
+            {
+              "jsonPath": "$[*].entries",
+              "language": "jsonpath",
+              "name": "Data",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].date.value",
+              "language": "jsonpath",
+              "name": "time_start",
+              "type": "time"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Historical Data - Urban",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "time_end",
+            "binary": {
+              "left": "time_start",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "time_start"
+              ],
+              "reducer": "allValues"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "time_end"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "lcd-gauge",
+            "filterable": false
+          },
+          "links": [
+            {
+              "title": "Link to Dashboard with Date",
+              "url": "https://ubcsupermileage.grafana.net/d/UUYLg3-nz/vehicle-gas-proto?from=${__value.time}&to=${__data.fields.time_end}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "super-light-red",
+                "value": 5
+              },
+              {
+                "color": "light-red",
+                "value": 25
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 50
+              },
+              {
+                "color": "dark-red",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Date"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "auto"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_start"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time_end"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              },
+              {
+                "id": "unit"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 6,
+        "x": 12,
+        "y": 4
+      },
+      "id": 11,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Date"
+          }
+        ]
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT DATE(TIMESTAMP(recorded_at), 'America/Vancouver') AS date, COUNT(DISTINCT(TIMESTAMP(recorded_at, 'America/Vancouver'))) as entries FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'PROTO' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()' GROUP BY DATE(TIMESTAMP(recorded_at), 'America/Vancouver')\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "r-FP_Pbnz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].date.value",
+              "name": "Date",
+              "type": "string"
+            },
+            {
+              "jsonPath": "$[*].entries",
+              "language": "jsonpath",
+              "name": "Data",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].date.value",
+              "language": "jsonpath",
+              "name": "time_start",
+              "type": "time"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Historical Data - Gas Proto",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "time_end",
+            "binary": {
+              "left": "time_start",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "time_start"
+              ],
+              "reducer": "allValues"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "time_end"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Home",
+  "uid": "XMNGk1-7k",
+  "version": 33,
+  "weekStart": ""
+}

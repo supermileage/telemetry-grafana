@@ -1,0 +1,1298 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 14,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 25
+              },
+              {
+                "color": "green",
+                "value": 50
+              },
+              {
+                "color": "blue",
+                "value": 75
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) as t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'sigstr' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Signal Strength",
+          "urlPath": ""
+        },
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) as t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'sigql' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Signal Quality",
+          "urlPath": ""
+        }
+      ],
+      "title": "Cellular Connection",
+      "type": "bargauge"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 5,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'tmpint' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Telemetry",
+          "urlPath": ""
+        },
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'tmpmot' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "r-FP_Pbnz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Motor",
+          "urlPath": ""
+        },
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'tmpfcs' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "r-FP_Pbnz"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Fuel Cell",
+          "urlPath": ""
+        }
+      ],
+      "title": "Temperatures",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 4.5
+              },
+              {
+                "color": "green",
+                "value": 11
+              },
+              {
+                "color": "orange",
+                "value": 13
+              },
+              {
+                "color": "red",
+                "value": 14
+              }
+            ]
+          },
+          "unit": "volt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 0,
+        "y": 4
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\": \"SELECT TIMESTAMP(recorded_at) as t, data FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'vin' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Voltage (Telemetry)",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 60,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "text",
+                "value": 0
+              },
+              {
+                "color": "green",
+                "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 0,
+        "y": 8
+      },
+      "id": 10,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT CAST(data AS numeric) * 3.6 AS data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'hvel' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Speedometer",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 60,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "velocitykmh"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 5,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT CAST(data AS numeric) * 3.6 AS data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'hvel' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Speed (Horizontal)",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1000": {
+                  "index": 0,
+                  "text": "∞"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 3
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "lengthm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 5,
+        "x": 0,
+        "y": 14
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) as t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'haccu' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Horizontal",
+          "urlPath": ""
+        },
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) as t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'vaccu' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": " ",
+              "type": "number"
+            }
+          ],
+          "hide": false,
+          "method": "POST",
+          "queryParams": "",
+          "refId": "Vertical",
+          "urlPath": ""
+        }
+      ],
+      "title": "GPS Accuracy",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "decimals": 6,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 25
+              },
+              {
+                "color": "orange",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "unit": "degree"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Speed (KM/h)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "velocitykmh"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Heading"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 20,
+        "x": 0,
+        "y": 17
+      },
+      "id": 5,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "type": "default"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": true,
+          "showDebug": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "showLegend": true,
+              "style": {
+                "color": {
+                  "field": "Speed (KM/h)",
+                  "fixed": "dark-green"
+                },
+                "opacity": 0.4,
+                "rotation": {
+                  "field": "Heading",
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "fixed": 30,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/unicons/arrow-up.svg",
+                  "mode": "fixed"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "location": {
+              "latitude": "lat",
+              "longitude": "lon",
+              "mode": "coords"
+            },
+            "name": "Layer 1",
+            "type": "markers"
+          }
+        ],
+        "view": {
+          "id": "coords",
+          "lat": 49.25268,
+          "lon": -123.146882,
+          "zoom": 12.08
+        }
+      },
+      "pluginVersion": "8.4.1",
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT A.data as lat, B.data as lon, CAST(C.data AS numeric) * 3.6 as hvel, D.data as hea, TIMESTAMP(A.recorded_at) as t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` as A, `ubc-smc-telemetry.telemetry_dataset.telemetry_table` as B, `ubc-smc-telemetry.telemetry_dataset.telemetry_table` as C, `ubc-smc-telemetry.telemetry_dataset.telemetry_table` as D WHERE A.vehicle = 'FC' AND B.vehicle = 'FC' AND C.vehicle = 'FC' AND D.vehicle = 'FC' AND A.event = 'lat' AND B.event = 'lon' AND C.event = 'hvel' AND D.event = 'hea' AND A.recorded_at = B.recorded_at AND B.recorded_at = C.recorded_at AND C.recorded_at = D.recorded_at AND A.data != '?' AND B.data != '?' AND TIMESTAMP(A.recorded_at) >= '$__isoFrom()' AND TIMESTAMP(A.recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].lat",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].lon",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].hvel",
+              "language": "jsonpath",
+              "name": "Speed (KM/h)",
+              "type": "number"
+            },
+            {
+              "jsonPath": "$[*].hea",
+              "language": "jsonpath",
+              "name": "Heading",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Position",
+      "type": "geomap"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "lengthm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 30
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'alt' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Altitude",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 20,
+          "min": -20,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": -8
+              },
+              {
+                "color": "yellow",
+                "value": -5
+              },
+              {
+                "color": "green",
+                "value": -3
+              },
+              {
+                "color": "text",
+                "value": -1
+              },
+              {
+                "color": "green",
+                "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 3
+              },
+              {
+                "color": "orange",
+                "value": 5
+              },
+              {
+                "color": "red",
+                "value": 8
+              }
+            ]
+          },
+          "unit": "accMS2"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 0,
+        "y": 37
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'hacce' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Acceleration (Horizontal)",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "max": 30,
+          "min": -30,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": -30
+              },
+              {
+                "color": "orange",
+                "value": -20
+              },
+              {
+                "color": "yellow",
+                "value": -20
+              },
+              {
+                "color": "green",
+                "value": -10
+              },
+              {
+                "color": "text",
+                "value": -3
+              },
+              {
+                "color": "green",
+                "value": 3
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "orange",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "accMS2"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 10,
+        "y": 37
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "body": "{\n  \"query\":\"SELECT data, TIMESTAMP(recorded_at) AS t, FROM `ubc-smc-telemetry.telemetry_dataset.telemetry_table` WHERE vehicle = 'FC' AND event = 'vacce' AND TIMESTAMP(recorded_at) >= '$__isoFrom()' AND TIMESTAMP(recorded_at) <= '$__isoTo()'\",\n  \"location\":\"US\"\n}",
+          "cacheDurationSeconds": 0,
+          "datasource": {
+            "type": "marcusolsson-json-datasource",
+            "uid": "${DS_JSON_API}"
+          },
+          "fields": [
+            {
+              "jsonPath": "$[*].t.value",
+              "name": "",
+              "type": "time"
+            },
+            {
+              "jsonPath": "$[*].data",
+              "language": "jsonpath",
+              "name": "",
+              "type": "number"
+            }
+          ],
+          "method": "POST",
+          "queryParams": "",
+          "refId": "A",
+          "urlPath": ""
+        }
+      ],
+      "title": "Acceleration (Vertical)",
+      "transformations": [],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [
+    "vehicle",
+    "fc"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "VEHICLE - Fuel-Cell Proto",
+  "uid": "THM10u-nz",
+  "version": 47,
+  "weekStart": ""
+}
